@@ -3,7 +3,7 @@ import tensorflow as tf
 from keras.utils import image_dataset_from_directory
 
 # Veri seti dizini
-dataset_path = "C:\\Users\\Metehan Sevgil\\Desktop\\yemekler\\Ana_Yemekler\\Döner" # Buraya kendi veri seti dizin yolunuzu yazın
+dataset_path = "C:\\Users\\Metehan Sevgil\\Desktop\\VeriMadenciligiProje\\Veriler" # Buraya kendi veri seti dizin yolunuzu yazın
 
 # Veri setini yükle
 batch_size = 32
@@ -27,6 +27,10 @@ val_ds = image_dataset_from_directory(
     image_size=img_size,
     batch_size=batch_size
 )
+
+# Sınıf isimlerini kontrol et
+class_names = train_ds.class_names
+print("Sınıflar:", class_names)
 
 # Performansı artırmak için veri setini önbelleğe al ve karıştır
 AUTOTUNE = tf.data.AUTOTUNE
