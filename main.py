@@ -1,6 +1,6 @@
 import tensorflow as tf
 
-from tensorflow.keras.utils import image_dataset_from_directory
+from keras.utils import image_dataset_from_directory
 
 # Veri seti dizini
 dataset_path = "C:\\Users\\Metehan Sevgil\\Desktop\\yemekler\\Ana_Yemekler\\Döner" # Buraya kendi veri seti dizin yolunuzu yazın
