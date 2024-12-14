@@ -5,7 +5,7 @@ import os
 target_size = (256, 256)
 
 # Görsellerin bulunduğu klasör
-input_folder = "C:\\Users\\Metehan Sevgil\\Desktop\\yemekler\\İcecekler"
+input_folder = "C:\\Users\\ismke\Belgeler\\VeriMadenciligiProje\\Veriler\\icecekler"
 output_folder = input_folder
 
 # Çıkış klasörünü oluştur
