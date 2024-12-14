@@ -14,18 +14,44 @@ class ImageProcessor {
   Interpreter? _interpreter;
 
   Future<void> loadModel() async {
-    _interpreter = await Interpreter.fromAsset('BOSSSS');
+    try {
+      _interpreter = await Interpreter.fromAsset('assets/models/model.tflite');
+      print('Model successfully loaded.');
+    } catch (e) {
+      print('Failed to load model: $e');
+    }
   }
 
   Future<List<dynamic>> runModel(Uint8List imageData) async {
     var input = preprocess(imageData);
 
-    var output = List.filled(1 * 1, 0.0).reshape([1, 1]);
+    // Here, output should be a 1D list to match the model's output
+    var output = List.filled(64, 0.0);  // Assuming your model has 64 output classes
 
     _interpreter?.run(input, output);
 
-    return output;
+    // Process the output to get the top prediction
+    List<dynamic> topPrediction = _getTopPrediction(output);
+    return topPrediction;
   }
+
+// Function to process and return the top prediction
+  List<dynamic> _getTopPrediction(List<double> output) {
+    double maxProbability = -1;
+    int classIndex = -1;
+
+    // Iterate through the output to find the highest probability
+    for (int i = 0; i < output.length; i++) {
+      if (output[i] > maxProbability) {
+        maxProbability = output[i];
+        classIndex = i;
+      }
+    }
+
+    return [classIndex, maxProbability];
+  }
+
+
 
 
   List<List<List<double>>> preprocess(Uint8List imageData) {
@@ -38,7 +64,7 @@ class ImageProcessor {
 
 
 
-    final img.Image resizedImage = img.copyResize(image, width: 224, height: 224);
+    final img.Image resizedImage = img.copyResize(image, width: 256, height: 256);
 
     final input = List.generate(
       224,
