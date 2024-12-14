@@ -1,5 +1,6 @@
 import tensorflow as tf
-
+from keras.applications import ResNet50
+from keras import layers, models
 from keras.utils import image_dataset_from_directory
 
 # Veri seti dizini
@@ -35,3 +36,40 @@ print("Sınıflar:", class_names)
 AUTOTUNE = tf.data.AUTOTUNE
 train_ds = train_ds.cache().shuffle(1000).prefetch(buffer_size=AUTOTUNE)
 val_ds = val_ds.cache().prefetch(buffer_size=AUTOTUNE)
+
+# ResNet'i temel model olarak yükle
+base_model = ResNet50(
+    weights="imagenet",
+    include_top=False,  # Kendi sınıflandırıcımızı ekleyeceğiz
+    input_shape=(256, 256, 3)
+)
+
+# Temel modeli dondur (önceden eğitilmiş ağırlıklar korunur)
+base_model.trainable = False
+
+# Model katmanları
+model = models.Sequential([
+    base_model,
+    layers.GlobalAveragePooling2D(),
+    layers.Dense(128, activation='relu'),
+    layers.Dropout(0.5),
+    layers.Dense(train_ds.cardinality().numpy(), activation='softmax')  # Sınıf sayısına göre ayarla
+])
+
+# Modeli derle
+model.compile(
+    optimizer=tf.keras.optimizers.Adam(),
+    loss=tf.keras.losses.SparseCategoricalCrossentropy(),
+    metrics=['accuracy']
+)
+
+# Modeli eğit
+epochs = 5  # Daha fazla eğitim için artırabilirsiniz
+history = model.fit(
+    train_ds,
+    validation_data=val_ds,
+    epochs=epochs
+)
+
+# Modeli kaydet
+model.save("C:\\Users\\Metehan Sevgil\\Desktop\\VeriMadenciligiProje\\deneme_resnet50_model.keras")
