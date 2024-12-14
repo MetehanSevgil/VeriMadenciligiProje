@@ -53,27 +53,25 @@ class _Page1InitState extends State<Page1Init> {
       appBar: AppBar(
         title: const Text('Veri Madenciliği Proje'),
       ),
-      body: Center(
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-            if (_selectedImage != null)
-        Image.memory(
-        _selectedImage!,
-        width: 200,
-        height: 200,
-            )
-            else
-              const Text('Henüz bir resim seçilmedi'),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: _pickImage,
-                child: const Text('Resim Yükle'),
-              ),
-              const SizedBox(height: 20),
-              Text('Sonuç: $_result'),
-            ],
-        ),
+      body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+          if (_selectedImage != null)
+      Image.memory(
+      _selectedImage!,
+      width: 200,
+      height: 200,
+    )
+          else
+            const Text('Henüz bir resim seçilmedi'),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: _pickImage,
+              child: const Text('Resim Yükle'),
+            ),
+            const SizedBox(height: 20),
+            Text('Sonuç: $_result'),
+          ],
       ),
     );
   }
