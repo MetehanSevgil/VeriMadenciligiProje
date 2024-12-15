@@ -5,7 +5,6 @@ from keras.utils import image_dataset_from_directory
 
 # Veri seti dizini
 dataset_path = "C:\\Users\\Metehan Sevgil\\Desktop\\VeriMadenciligiProje\\Veriler" # Buraya kendi veri seti dizin yolunuzu yazın
-
 # Veri setini yükle
 batch_size = 32
 img_size = (256, 256)
