@@ -1,4 +1,5 @@
 import openpyxl
+import json
 corba = []
 ara_yemek = []
 new_corba = []
@@ -17,6 +18,9 @@ for i in range(1,8):
     number=13    
     column = chr(ord(column)+1)
 #print(corba)    
+
+
+#############################################################################################################################
 number2=16
 column2= chr(65)
 flag =0  
@@ -88,15 +92,60 @@ for ana_etsiz_yemek_elemani in ana_etsiz_yemek:
 #         new_corba.extend([corba.strip() for corba in corbalar])
 #     else:
 #         print("None değeri ile karşılaşıldı, bu öğe atlandı.")
-# new_ara_yemek = []
-# for ara_yemek_elemani in ara_yemek:
-#     if ara_yemek_elemani is not None:
-#         corbalar = ara_yemek_elemani.split('-')
-#         new_ara_yemek.extend([corba.strip() for corba in corbalar])
-#     else:
-#         print("None değeri ile karşılaşıldı, bu öğe atlandı.")
 
-# print(new_ara_yemek)     
+# print(new_corba)        
 
+        ###################################################################################################
+new_ara_yemek = []
+for ara_yemek_elemani in ara_yemek:
+    if ara_yemek_elemani is not None:
+        corbalar = ara_yemek_elemani.split('-')
+        new_ara_yemek.extend([corba.strip() for corba in corbalar])
+    else:
+        print("None değeri ile karşılaşıldı, bu öğe atlandı.")
 
+#print(new_ara_yemek)     
 
+### CONVERT JSON ##############
+corba_dict_list = []
+unique_corba = set(new_corba)
+# for corba_elemani in unique_corba:
+#     parts = corba_elemani.split('(')
+#     corba_ismi = parts[0].strip()  # Çorba ismi
+#     kalori = parts[1].replace(')', '').strip()  # Kalori bilgisi
+    
+#     corba_dict = {
+#         "isim": corba_ismi,
+#         "kalori": kalori,
+#         "tür": "corba"
+#     }
+    
+#     corba_dict_list.append(corba_dict)
+
+# corba_json = json.dumps(corba_dict_list, indent=4, ensure_ascii=False)
+# print(corba_json)
+
+unique_ara_yemek = set(new_ara_yemek)
+
+ara_yemek_dict_list = []
+
+for yemek_elemani in unique_ara_yemek:
+    parts = yemek_elemani.split('(')
+    
+    if len(parts) > 1:  
+        yemek_ismi = parts[0].strip()  
+        kalori = parts[1].replace(')', '').strip()  
+    else:
+        yemek_ismi = yemek_elemani.strip()
+        kalori = "Bilgi yok"
+    
+    yemek_dict = {
+        "isim": yemek_ismi,
+        "kalori": kalori,
+        "tür": "Yardımcı Yemek"
+    }
+    
+    ara_yemek_dict_list.append(yemek_dict)
+
+ara_yemek_json = json.dumps(ara_yemek_dict_list, indent=4, ensure_ascii=False)
+print(ara_yemek_json)
