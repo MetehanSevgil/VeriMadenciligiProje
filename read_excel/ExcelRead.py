@@ -2,6 +2,9 @@ import openpyxl
 corba = []
 ara_yemek = []
 new_corba = []
+ana_etli_yemek = []
+ana_etsiz_yemek = []
+
 wb = openpyxl.load_workbook('yemek.xlsx')
 ws = wb.active
 #print('Total number of rows: '+str(ws.max_row)+'. And total number of columns: '+str(ws.max_column))
@@ -30,7 +33,54 @@ for k in range(1,8):
     column2 = chr(ord(column2)+1)
     flag=0       
     
-print(ara_yemek)
+#print(ara_yemek)
+
+number3=14
+column3= chr(65)
+for i in range(1,8):
+    for j in range(1,6):
+        ana_etli_yemek.append(ws[str(column3)+str(number3)].value)
+        number3=number3 + 9
+    number3=14    
+    column3= chr(ord(column3)+1)
+
+
+#print(ana_etli_yemek)
+
+new_ana_etli_yemek = []
+for ana_etli_yemek_elemani in ana_etli_yemek:
+     if ana_etli_yemek_elemani is not None:
+         ana_etli_yemekler = ana_etli_yemek_elemani.split('-')
+         new_ana_etli_yemek.extend([ana_etli_yemek.strip() for ana_etli_yemek in ana_etli_yemekler])
+     else:
+         print("None değeri ile karşılaşıldı, bu öğe atlandı.")
+
+print(new_ana_etli_yemek)
+#print(ana_etsiz_yemek)
+
+number4=15
+column4= chr(65)
+for i in range(1,8):
+    for j in range(1,6):
+        ana_etsiz_yemek.append(ws[str(column4)+str(number4)].value)
+        number4=number4 + 9
+    number4=15    
+    column4= chr(ord(column4)+1)
+
+# print(ana_etsiz_yemek)
+
+
+new_ana_etsiz_yemek = []
+for ana_etsiz_yemek_elemani in ana_etsiz_yemek:
+     if ana_etsiz_yemek_elemani is not None:
+        ana_etsiz_yemekler = ana_etsiz_yemek_elemani.split('-')
+        new_ana_etsiz_yemek.extend([ana_etsiz_yemek.strip() for ana_etsiz_yemek in ana_etsiz_yemekler])
+     else:
+         print("None değeri ile karşılaşıldı, bu öğe atlandı.")
+
+#print(new_ana_etsiz_yemek)
+
+
 
 # for corba_elemani in corba:
 #     if corba_elemani is not None:
@@ -47,3 +97,6 @@ print(ara_yemek)
 #         print("None değeri ile karşılaşıldı, bu öğe atlandı.")
 
 # print(new_ara_yemek)     
+
+
+
