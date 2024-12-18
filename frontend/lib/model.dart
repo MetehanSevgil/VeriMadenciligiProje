@@ -58,7 +58,6 @@ class ImageProcessor {
 
     var input = preprocess(imageData);
 
-    // Create output tensor with the correct shape [1, number_of_classes]
     var output = List.generate(1, (_) => List.filled(68, 0.0));
     try {
       _interpreter?.run(input, output);
@@ -78,7 +77,6 @@ class ImageProcessor {
     }
   }
 
-  // Helper method to preprocess the image
   List<List<List<List<double>>>> preprocess(Uint8List imageData) {
     final img.Image? image = img.decodeImage(imageData);
 
@@ -86,10 +84,8 @@ class ImageProcessor {
       throw Exception("Invalid image format");
     }
 
-    // Resize to exactly match model input dimensions
     final img.Image resizedImage = img.copyResize(image, width: 256, height: 256);
 
-    // Create a 4D tensor [1, height, width, channels]
     final input = List.generate(
       1,
           (_) => List.generate(
@@ -111,7 +107,6 @@ class ImageProcessor {
     return input;
   }
 
-  // Helper method to get the index of the highest probability
   int _getTopPrediction(List<double> output) {
     double maxProbability = -1;
     int classIndex = -1;
