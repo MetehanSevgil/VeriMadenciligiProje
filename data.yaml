@@ -1,0 +1,13 @@
+path: C:\Users\Metehan Sevgil\Desktop\VeriMadenciligiProje\data
+train: images/train
+val: images/train
+
+names:
+  0: ekmek
+  1: su
+  2: etli_patates
+  3: cacik
+  4: makarna
+  5: kadayif
+  6: patates_kofte
+  7: cigkofte
