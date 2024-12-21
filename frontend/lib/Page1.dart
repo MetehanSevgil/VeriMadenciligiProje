@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/table_yemek.dart';
 
 import 'model.dart';
 import 'dart:typed_data';
 import 'package:image_picker/image_picker.dart';
+
 class Page1Init extends StatefulWidget {
   const Page1Init({super.key});
 
@@ -13,7 +15,7 @@ class Page1Init extends StatefulWidget {
 class _Page1InitState extends State<Page1Init> {
   final ImageProcessor _imageProcessor = ImageProcessor();
   Uint8List? _selectedImage;
-  String _result = "";
+  String? _result;
 
   @override
   void initState() {
@@ -50,32 +52,49 @@ class _Page1InitState extends State<Page1Init> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //backgroundColor: Theme.of(context).colorScheme.onPrimary,
       appBar: AppBar(
-        title: const Text('Veri Madenciliği Proje'),
+        title: Center(
+            child: Text(
+          'Tepsi Analiz Sistemi',
+          style: TextStyle(
+              fontSize: 24,
+              color: Theme.of(context).colorScheme.onTertiaryContainer),
+        )),
       ),
       body: Center(
         child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
             if (_selectedImage != null)
-        Image.memory(
-        _selectedImage!,
-        width: 200,
-        height: 200,
-            )
+              Image.memory(
+                _selectedImage!,
+                width: 200,
+                height: 200,
+              )
             else
-              const Text('Henüz bir resim seçilmedi'),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: _pickImage,
-                child: const Text('Resim Yükle'),
+              Text(
+                'Henüz bir resim seçilmedi',
+                style: TextStyle(
+                    color: Theme.of(context).colorScheme.onTertiaryContainer,
+                    fontSize: 17),
               ),
-              const SizedBox(height: 20),
-              Text('Sonuç: $_result'),
-            ],
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: _pickImage,
+              child: Text(
+                'Resim Yükle',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+            ),
+            const SizedBox(height: 20),
+            if (_result != null)
+              TableYemek(
+                result: _result,
+              ),
+          ],
         ),
       ),
     );
   }
 }
-
