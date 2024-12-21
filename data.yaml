@@ -1,6 +1,6 @@
 path: C:\Users\Metehan Sevgil\Desktop\VeriMadenciligiProje\data
 train: images/train
-val: images/train
+val: images/val
 
 names:
   0: ekmek
@@ -31,7 +31,7 @@ names:
   25: et_doner
   26: tavuk_doner
   27: yesil_fasulye
-  28: pilic_baget
+  28: pilic_kroket
   29: sekerpare
   30: pasta
   31: pizza
@@ -55,10 +55,13 @@ names:
   49: tursu
   50: pilic_sinitzel
   51: ispanak
-  52: "izgara_kofte"
+  52: izgara_kofte
   53: musakka
   54: karnabahar_yan_yemek
   55: patlican_terletme_yan
-  56: "izmir_kofte"
+  56: izmir_kofte
   57: sulu_kofte
+  58: nohut
+  59: mantarli_et_sote
+  60: biber_dolmasi
 
