@@ -1,5 +1,7 @@
 import openpyxl
 import json
+
+
 corba = []
 ara_yemek = []
 new_corba = []
@@ -59,7 +61,7 @@ for ana_etli_yemek_elemani in ana_etli_yemek:
      else:
          print("None değeri ile karşılaşıldı, bu öğe atlandı.")
 
-print(new_ana_etli_yemek)
+#print(new_ana_etli_yemek)
 #print(ana_etsiz_yemek)
 
 number4=15
@@ -142,16 +144,13 @@ for yemek_elemani in unique_ara_yemek:
     yemek_dict = {
         "isim": yemek_ismi,
         "kalori": kalori,
-        "tür": "Yardımcı Yemek"
+        "tur": "Yardımcı Yemek"
     }
     
     ara_yemek_dict_list.append(yemek_dict)
 
 ara_yemek_json = json.dumps(ara_yemek_dict_list, indent=4, ensure_ascii=False)
-print(ara_yemek_json)
-
-
-
+#print(ara_yemek_json)
 
 
 unique_ana_etli_yemek = set(new_ana_etli_yemek)
@@ -171,7 +170,7 @@ for yemek_elemani in unique_ana_etli_yemek:
     yemek_dict = {
         "isim": yemek_ismi,
         "kalori": kalori,
-        "tür": "Etli Yemek"
+        "tur": "Etli Yemek"
     }
     
     ana_etli_yemek_dict_list.append(yemek_dict)
@@ -179,6 +178,11 @@ for yemek_elemani in unique_ana_etli_yemek:
 ana_etli_yemek_json = json.dumps(ana_etli_yemek_dict_list, indent=4, ensure_ascii=False)
 
 
+
+#print(ana_etsiz_yemek_json)
+
+#print(unique_ana_etsiz_yemek)
+#print(ana_etli_yemek_json)
 
 
 unique_ana_etsiz_yemek = set(new_ana_etsiz_yemek)
@@ -198,13 +202,21 @@ for yemek_elemani in unique_ana_etsiz_yemek:
     yemek_dict = {
         "isim": yemek_ismi,
         "kalori": kalori,
-        "tür": "Etsiz Yemek"
+        "tur": "Etsiz Yemek"
     }
+    ana_etsiz_yemek_dict_list.append(yemek_dict)
 
-ana_etsiz_yemek_dict_list.append(yemek_dict)
+ana_etsiz_yemek_json = json.dumps(ana_etsiz_yemek_dict_list, indent=4, ensure_ascii=False)
 
-ana_etsiz_yemek_json = json.dumps(ara_yemek_dict_list, indent=4, ensure_ascii=False)
+print(unique_ana_etli_yemek)
+print("-------------------------*********************---------------------------------")
 
-print(ana_etli_yemek_json)
-
-
+print("++++++++++++++++++++++++++++++1++++++++++++++++++++++++++++++++++++++++")
+print(unique_ana_etsiz_yemek)
+print("++++++++++++++++++++++++++++++2++++++++++++++++++++++++++++++++++++++++")
+print(new_ana_etsiz_yemek)
+print("+++++++++++++++++++++++++++++++3+++++++++++++++++++++++++++++++++++++++")
+print(ana_etsiz_yemek_dict_list)
+print("++++++++++++++++++++++++++++++++4++++++++++++++++++++++++++++++++++++++")
+print(ana_etsiz_yemek_json)
+print("+++++++++++++++++++++++++++++++++5+++++++++++++++++++++++++++++++++++++")
